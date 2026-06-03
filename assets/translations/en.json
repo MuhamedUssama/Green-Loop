@@ -42,6 +42,16 @@
       "hint": "Hint",
       "hintMessage": "No changes made",
       "buttonUpdate": "Update"
+    },
+    "qr_codes": {
+      "title": "My Redeemed Items",
+      "no_qrs": "No redeemed items found",
+      "show_qr": "Show QR",
+      "scanned": "Scanned",
+      "active": "Active & Ready",
+      "scan_hint": "Show this QR code to the cashier/representative to redeem.",
+      "already_scanned": "This QR code has already been scanned.",
+      "dismiss": "Dismiss"
     }
   },
   "pekiaPrice": {

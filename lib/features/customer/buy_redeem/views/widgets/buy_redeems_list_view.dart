@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:green_loop/core/helper/show_custom_dialog.dart';
+import 'package:green_loop/core/helper/show_qr_dialog.dart';
 import 'package:green_loop/core/utilies/colors/app_colors.dart';
-import 'package:green_loop/core/utilies/extensions/app_extensions.dart';
 import 'package:green_loop/core/utilies/styles/app_text_styles.dart';
 import 'package:green_loop/features/company/redeem/views/widgets/redeem_list_tile.dart';
 import 'package:green_loop/features/customer/buy_redeem/view_models/cubit/buy_redeem_cubit.dart';
@@ -27,10 +27,11 @@ class RedeemsListView extends StatelessWidget {
                 dialogType: DialogType.noHeader);
           }
           if (state is EnoughPoints) {
-            showCustomDialog(
-                title: LocaleKeys.Redeem_dialog_Success.tr(),
-                description: LocaleKeys.Redeem_dialog_successMessage.tr(),
-                dialogType: DialogType.success);
+            showQrCodeDialog(
+              context,
+              qrData: state.qrCode,
+              itemName: state.redeemName,
+            );
           }
         },
         builder: (context, state) {
@@ -50,42 +51,35 @@ class RedeemsListView extends StatelessWidget {
             );
           }
           final redeemCubit = context.read<BuyRedeemCubit>();
-          return ListView.builder(
+          return ListView.separated(
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
             itemCount: redeemCubit.redeemList.length,
-            padding: EdgeInsets.only(
-              top: context.height * 0.02,
-              left: context.width * 0.03,
-              right: context.width * 0.03,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  bottom: context.height * 0.01,
-                ),
-                child: state is CheckPoints
-                    ? Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.primaryColor,
-                        ),
-                      )
-                    : RedeemListTile(
-                        redeemModel: redeemCubit.redeemList[index],
-                        iconData: Icons.shopify_outlined,
-                        onPressed: () {
-                          showCustomDialog(
-                            title: LocaleKeys.Redeem_dialog_Hint.tr(),
-                            description: "Are you sure you want to buy this item?",
-                            dialogType: DialogType.question,
-                            btnOkOnPress: () {
-                              redeemCubit.buyRedeem(
-                                redeemPrice: redeemCubit.redeemList[index].price,
-                              );
-                            },
-                            btnCancelOnPress: () {},
-                          );
-                        },
+              return state is CheckPoints
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
                       ),
-              );
+                    )
+                  : RedeemListTile(
+                      redeemModel: redeemCubit.redeemList[index],
+                      iconData: Icons.shopify_outlined,
+                      onPressed: () {
+                        showCustomDialog(
+                          title: LocaleKeys.Redeem_dialog_Hint.tr(),
+                          description:
+                              "Are you sure you want to buy this item?",
+                          dialogType: DialogType.question,
+                          btnOkOnPress: () {
+                            redeemCubit.buyRedeem(
+                              redeemModel: redeemCubit.redeemList[index],
+                            );
+                          },
+                          btnCancelOnPress: () {},
+                        );
+                      },
+                    );
             },
           );
         },

@@ -58,6 +58,16 @@ class CodegenLoader extends AssetLoader{
       "hint": "تلميح",
       "hintMessage": "لم يتم إجراء أي تغييرات",
       "buttonUpdate": "تحديث"
+    },
+    "qr_codes": {
+      "title": "رموز الـ QR الخاصة بي",
+      "no_qrs": "لم يتم العثور على أي عناصر مستردة",
+      "show_qr": "عرض الرمز",
+      "scanned": "تم المسح",
+      "active": "نشط وجاهز",
+      "scan_hint": "اعرض رمز الـ QR هذا لمندوب المتجر للحصول على جائزتك.",
+      "already_scanned": "تم مسح هذا الرمز بالفعل.",
+      "dismiss": "إغلاق"
     }
   },
   "pekiaPrice": {
@@ -277,6 +287,16 @@ static const Map<String,dynamic> _en = {
       "hint": "Hint",
       "hintMessage": "No changes made",
       "buttonUpdate": "Update"
+    },
+    "qr_codes": {
+      "title": "My Redeemed Items",
+      "no_qrs": "No redeemed items found",
+      "show_qr": "Show QR",
+      "scanned": "Scanned",
+      "active": "Active & Ready",
+      "scan_hint": "Show this QR code to the cashier/representative to redeem.",
+      "already_scanned": "This QR code has already been scanned.",
+      "dismiss": "Dismiss"
     }
   },
   "pekiaPrice": {

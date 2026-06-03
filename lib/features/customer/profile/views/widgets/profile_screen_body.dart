@@ -9,8 +9,10 @@ import 'package:green_loop/core/utilies/extensions/app_extensions.dart';
 import 'package:green_loop/features/auth/sign_in/views/widgets/custom_loading.dart';
 import 'package:green_loop/features/customer/categories/views/widgets/triple_bottom_wave_painter.dart';
 import 'package:green_loop/features/customer/profile/view_models/cubit/update_profile_cubit.dart';
+import 'package:green_loop/features/customer/profile/view_models/cubit/my_qr_codes_cubit.dart';
 import 'package:green_loop/features/customer/profile/views/widgets/pick_image.dart';
 import 'package:green_loop/features/customer/profile/views/widgets/user_details.dart';
+import 'package:green_loop/features/customer/profile/views/widgets/my_qr_codes_list.dart';
 import 'package:green_loop/generated/locale_keys.g.dart';
 
 class ProfileScreenBody extends StatelessWidget {
@@ -19,8 +21,11 @@ class ProfileScreenBody extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UpdateProfileCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => UpdateProfileCubit()),
+        BlocProvider(create: (context) => MyQrCodesCubit()),
+      ],
       child: BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
         listener: (context, state) {
           if (state is UpdateProfileSuccess) {
@@ -84,7 +89,10 @@ class ProfileScreenBody extends StatelessWidget {
                           onPressed: () {
                             cubit.updateProfile();
                           },
-                        )
+                        ),
+                  const SizedBox(height: 24),
+                  const MyQrCodesButton(),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),

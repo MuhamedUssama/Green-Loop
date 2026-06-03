@@ -17,12 +17,10 @@ class CustomPekiaPriceTitle extends StatelessWidget {
       child: Container(
         height: context.width * 0.18,
         decoration: BoxDecoration(
-          color: color?.withOpacity(0.7) ??
-              AppColors.secondryColor.withOpacity(0.8),
+          color: color?.withValues(alpha: .7) ??
+              AppColors.secondryColor.withValues(alpha: .8),
         ),
-        padding: EdgeInsets.symmetric(
-          vertical: context.height * 0.03,
-        ),
+        padding: EdgeInsets.symmetric(vertical: 16),
         child: Center(
           child: Text(
             title,

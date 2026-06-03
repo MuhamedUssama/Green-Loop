@@ -21,6 +21,11 @@ final class NotEnoughPoints extends BuyRedeemState {
   NotEnoughPoints({required this.errorMessage});
 }
 
-final class EnoughPoints extends BuyRedeemState {}
+final class EnoughPoints extends BuyRedeemState {
+  final String qrCode;
+  final String redeemName;
+
+  EnoughPoints({required this.qrCode, required this.redeemName});
+}
 
 final class CheckPoints extends BuyRedeemState {}

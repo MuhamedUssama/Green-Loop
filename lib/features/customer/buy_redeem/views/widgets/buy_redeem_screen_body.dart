@@ -24,6 +24,7 @@ class BuyRedeemScreenBody extends StatelessWidget {
             ),
           ),
           RedeemItemsTitle(),
+          const SizedBox(height: 16),
           RedeemsListView(),
         ],
       ),
